@@ -1,0 +1,38 @@
+<!--
+  Place for filters
+ -->
+
+<div class="form-group row" [formGroup]="filterStudentForm">
+  <label class="col-sm-3">
+    Student Category
+  </label>
+  <div class="col-sm-3">
+    <select class="form-control" formControlName="studentCategory">
+      <option [value]="all">All</option>
+      <option [value]="domestic">Domestic</option>
+      <option [value]="international">International</option>
+    </select>
+  </div>
+
+  <label class="col-sm-2 offset-sm-1">
+    Filter By name
+  </label>
+  <div class="col-sm-3">
+    <input type="text" class="form-control" placeholder="Name" formControlName="name">
+  </div>
+
+</div>
+
+<div class="card-columns">
+  <div class="card mb-3" *ngFor="let student of studentsArr" [ngClass]="{'bg-light': student.studentCategory == 'DOMESTIC',
+           'text-white bg-info': student.studentCategory !== 'DOMESTIC' }">
+    <div class="card-body">
+      <h5 class="card-title">{{student.name | uppercase }}</h5>
+      <button type="button" class="btn btn-secondary right-10" (click)="viewUser(student.id)" >View</button>
+      <button type="button" class="btn btn-secondary right-10" (click)="editUser(student.id)" >Edit</button>
+      <button type="button" class="btn btn-secondary right-10" (click)="onDelete(student.id)"
+        data-target="#deleteModal">Delete</button>
+    </div>
+  </div>
+
+</div>

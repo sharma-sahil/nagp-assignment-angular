@@ -1,0 +1,30 @@
+<div class="divContainer">
+
+  <h2 class="loginHeader"> Login School Admin </h2>
+
+  <form class="form-signin" #loginForm="ngForm" (ngSubmit)="onSubmit()">
+
+    <div class="divInput">
+      <label for="userName" class="formLabel">User Name: </label>
+      <input id="userName" name="userName" type="text" class="form-control" maxlength="20" [(ngModel)]="userName"
+        placeholder="User name" #user="ngModel" pattern="[a-zA-Z0-9]+" value=""  required />
+      <div *ngIf="user.errors && (user.dirty ||user.touched)" class="alert-box alert alert-danger">
+        <div [hidden]="!user.errors.required" style="z-index: 5">Username is required</div>
+        <div [hidden]="!user.errors.maxlength">Username cannot be more than 20 characters long.</div>
+      </div>
+    </div>
+    <div class="divInput">
+      <label for="userPassword" class="formLabel">Password: </label>
+      <input id="userPassword" name="userPassword" type="password" class="form-control" maxlength="20"
+        placeholder="password" [(ngModel)]="userPassword" #pass="ngModel" pattern="[a-zA-Z0-9]+" value=""  required />
+      <div *ngIf="pass.errors && (pass.dirty ||pass.touched)" class="alert-box alert alert-danger">
+        <div [hidden]="!pass.errors.required" style="z-index: 5">Password is required</div>
+        <div [hidden]="!pass.errors.maxlength">Password cannot be more than 20 characters long.</div>
+      </div>
+    </div>
+    <div class="divInput">
+      <button id="login" [disabled]="loginForm.invalid" class="btn btn-lg btn-primary btn-block"
+        type="Submit">Login</button>
+    </div>
+  </form>
+</div>

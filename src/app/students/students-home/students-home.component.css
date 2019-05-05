@@ -1,0 +1,11 @@
+.divContainer{
+  margin-top: 20px;
+  width: 60%;
+  margin-left: 20%;
+}
+table,th {
+  text-align: center
+}
+p{
+  margin : 10px 0px 0px 0px;
+}

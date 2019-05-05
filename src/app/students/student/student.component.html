@@ -1,0 +1,121 @@
+<div class="alert alert-success" role="alert" *ngIf="showAddFormSuccess">
+  Student has been added successfully.
+</div>
+
+<div class="alert alert-danger" role="alert" *ngIf="showFormErrors">
+  You have some form errors. Please check below.
+</div>
+
+<div class="alert alert-success" role="alert" *ngIf="showEditFormSuccess">
+  Student has been Updated successfully.
+</div>
+
+<div class="container">
+  <div class="heading">
+    <h2>
+      On Boarding Form
+    </h2>
+  </div>
+  <form class="form-horizontal" [formGroup]="addStudentForm">
+    <div class="form-group row">
+      <label class="col-sm-3">
+        Student Name : <span class="required">*</span>
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" placeholder="Name" formControlName="name"
+          [ngClass]="{ 'has-error' : showFormErrors && addStudentForm.controls.name.errors?.required }">
+        <span class="error-mg" *ngIf="showFormErrors && addStudentForm.controls.name.errors?.required">
+          <i class="icon-error"></i> Student name is required
+        </span>
+      </div>
+
+    </div>
+    <div class="form-group row">
+      <label for="exampleFormControlSelect1" class="col-sm-3">
+        Student Category <span class="required">*</span>
+      </label>
+      <div class="col-sm-8">
+        <select class="form-control" id="exampleFormControlSelect1" formControlName="studentCategory">
+          <option [value]="domestic">Domestic</option>
+          <option [value]="international">International</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4">
+        Documents
+      </div>
+      <div class="form-check col-sm-8">
+        <div *ngFor="let doc of documentDetails.controls;let i = index">
+          <div [formGroup]="doc">
+            <label class="form-check-label  col-sm-5" for="defaultCheck{{i}}">
+              {{ doc.get('documentName').value }}
+              <span class="required" *ngIf="doc.get('required').value">*</span>
+            </label>
+            <input class="form-check-input" formControlName="checked" type="checkbox" id="defaultCheck{{i}}">
+          </div>
+
+        </div>
+        <span class="error-mg" *ngIf="showFormErrors && addStudentForm.controls.documents.errors?.notChecked">
+          <i class="icon-error"></i> Please select all the required documents
+        </span>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-sm-3 col-form-label">
+        Date Of Birth : <span class="required">*</span>
+      </label>
+      <div class="col-sm-8">
+        <input type="date" class="form-control" formControlName="dob"
+          [ngClass]="{ 'has-error' : showFormErrors && addStudentForm.controls.dob.errors?.required }">
+        <span class="error-mg" *ngIf="showFormErrors && addStudentForm.controls.dob.errors?.required">
+          <i class="icon-error"></i> Date of Birth is required
+        </span>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3">
+        Father's Name : <span class="required">*</span>
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" placeholder="Father's Name" formControlName="fatherName"
+          [ngClass]="{ 'has-error' : showFormErrors && addStudentForm.controls.fatherName.errors?.required }">
+        <span class="error-mg" *ngIf="showFormErrors && addStudentForm.controls.fatherName.errors?.required">
+          <i class="icon-error"></i> Father's Name is required
+        </span>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3">
+        Mothers's Name : <span class="required">*</span>
+      </label>
+      <div class="col-sm-8">
+        <input type="text" class="form-control" placeholder="Mothers's Name" formControlName="motherName"
+          [ngClass]="{ 'has-error' : showFormErrors && addStudentForm.controls.motherName.errors?.required }">
+        <span class="error-mg" *ngIf="showFormErrors && addStudentForm.controls.motherName.errors?.required">
+          <i class="icon-error"></i> Mothers's Name is required
+        </span>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-3">
+        Last class score : <span class="required">*</span>
+      </label>
+      <div class="col-sm-8">
+        <input type="number" class="form-control" placeholder="% (marks)" formControlName="lastScore"
+          [ngClass]="{ 'has-error' : showFormErrors && (addStudentForm.controls.lastScore.errors?.required
+                    || addStudentForm.controls.lastScore.errors?.min || addStudentForm.controls.lastScore.errors?.max ) }">
+        <span class="error-mg" *ngIf="showFormErrors && addStudentForm.controls.lastScore.errors?.required">
+          <i class="icon-error"></i> Last class score is required
+        </span>
+        <span class="error-mg" *ngIf="showFormErrors && (addStudentForm.controls.lastScore.errors?.min
+            || addStudentForm.controls.lastScore.errors?.max) ">
+          <i class="icon-error"></i> Last class score must be between 0 and 100
+        </span>
+      </div>
+    </div>
+    <button class="btn btn-primary" (click)="submitForm()" *ngIf="viewType === viewTypeCreate">OnBoard Student</button>
+    <button class="btn btn-primary" (click)="editStudent()" *ngIf="viewType === viewTypeEdit">Edit Student</button>
+  </form>
+</div>

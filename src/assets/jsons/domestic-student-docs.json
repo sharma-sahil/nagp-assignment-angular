@@ -1,0 +1,26 @@
+[
+  {
+    "documentName": "Domicile Certificate",
+    "required": true
+  },
+  {
+    "documentName": "Birth Certificate",
+    "required": true
+  },
+  {
+    "documentName": "Previous Marksheets",
+    "required": true
+  },
+  {
+    "documentName": "Police Clearance",
+    "required": false
+  },
+  {
+    "documentName": "Passport",
+    "required": false
+  },
+  {
+    "documentName": "Signed Declaration",
+    "required": true
+  }
+]
